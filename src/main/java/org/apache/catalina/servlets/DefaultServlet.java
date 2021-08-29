@@ -537,8 +537,8 @@ public class DefaultServlet
     /**
      * Process a POST request for the specified resource.
      *
-     * @param request The servlet request we are processing
-     * @param response The servlet response we are creating
+     * @param req The servlet request we are processing
+     * @param resp The servlet response we are creating
      *
      * @exception IOException if an input/output error occurs
      * @exception ServletException if a servlet-specified error occurs
@@ -687,8 +687,8 @@ public class DefaultServlet
     /**
      * Process a POST request for the specified resource.
      *
-     * @param request The servlet request we are processing
-     * @param response The servlet response we are creating
+     * @param req The servlet request we are processing
+     * @param resp The servlet response we are creating
      *
      * @exception IOException if an input/output error occurs
      * @exception ServletException if a servlet-specified error occurs
@@ -766,7 +766,7 @@ public class DefaultServlet
      * Get the ETag associated with a file.
      *
      * @param resourceInfo File object
-     * @param strong True if we want a strong ETag, in which case a checksum
+     * @param //strong True if we want a strong ETag, in which case a checksum
      * of the file has to be calculated
      */
     protected String getETag(ResourceInfo resourceInfo) {
@@ -1450,12 +1450,12 @@ public class DefaultServlet
 
             // Render the directory entries within this directory
             DirContext directory = resourceInfo.directory;
-            NamingEnumeration enum =
+            NamingEnumeration enume =
                 resourceInfo.resources.list(resourceInfo.path);
             boolean shade = false;
-            while (enum.hasMoreElements()) {
+            while (enume.hasMoreElements()) {
 
-                NameClassPair ncPair = (NameClassPair) enum.nextElement();
+                NameClassPair ncPair = (NameClassPair) enume.nextElement();
                 String resourceName = ncPair.getName();
                 ResourceInfo childResourceInfo =
                     new ResourceInfo(resourceName, directory);

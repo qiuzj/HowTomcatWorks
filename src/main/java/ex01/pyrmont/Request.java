@@ -16,9 +16,9 @@ public class Request {
     // Read a set of characters from the socket
     StringBuffer request = new StringBuffer(2048);
     int i;
-    byte[] buffer = new byte[2048];
+    byte[] buffer = new byte[10240];
     try {
-      i = input.read(buffer);
+      i = input.read(buffer); // 一次性读出所有HTTP请求信息（请求行、请求头、消息体）
     }
     catch (IOException e) {
       e.printStackTrace();
@@ -31,13 +31,19 @@ public class Request {
     uri = parseUri(request.toString());
   }
 
+  /**
+   * 解析出URI
+   *
+   * @param requestString
+   * @return
+   */
   private String parseUri(String requestString) {
     int index1, index2;
-    index1 = requestString.indexOf(' ');
+    index1 = requestString.indexOf(' '); // HTTP请求行的第1个空格位置
     if (index1 != -1) {
-      index2 = requestString.indexOf(' ', index1 + 1);
+      index2 = requestString.indexOf(' ', index1 + 1); // HTTP请求行的第2个空格位置
       if (index2 > index1)
-        return requestString.substring(index1 + 1, index2);
+        return requestString.substring(index1 + 1, index2); // 截取URI
     }
     return null;
   }

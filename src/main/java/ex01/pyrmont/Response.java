@@ -31,6 +31,7 @@ public class Response {
     byte[] bytes = new byte[BUFFER_SIZE];
     FileInputStream fis = null;
     try {
+      // 读取web根目录下的指定文件，循环写到输出流
       File file = new File(HttpServer.WEB_ROOT, request.getUri());
       if (file.exists()) {
         fis = new FileInputStream(file);
@@ -52,7 +53,7 @@ public class Response {
     }
     catch (Exception e) {
       // thrown if cannot instantiate a File object
-      System.out.println(e.toString() );
+      System.out.println(e.toString() ); // java.net.SocketException: Software caused connection abort: socket write error
     }
     finally {
       if (fis!=null)
